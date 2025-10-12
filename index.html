@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Dipayan Saha — LLM‑Driven SoC Security</title>
+  <meta name="description" content="Portfolio of Dipayan Saha — Researcher in AI & Hardware Security, specializing in LLM‑driven, agentic workflows for SoC security verification." />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg:#0b0c10; --panel:#12141a; --ink:#e8eef5; --muted:#a8b3c7; --brand:#7c9cff; --accent:#86efac; --chip:#1e2430; --line:#222837;
+      --radius:16px; --gap:16px; --max:1100px;
+    }
+    *{box-sizing:border-box}
+    html,body{margin:0;padding:0;font-family:Inter,system-ui,Segoe UI,Roboto,Helvetica,Arial,sans-serif;background:var(--bg);color:var(--ink)}
+    a{color:var(--brand);text-decoration:none}
+    a:hover{text-decoration:underline}
+    .container{max-width:var(--max);margin:0 auto;padding:24px}
+    header{position:sticky;top:0;backdrop-filter:saturate(140%) blur(10px);background:linear-gradient(180deg,rgba(11,12,16,.9),rgba(11,12,16,.5) 60%,rgba(11,12,16,0));z-index:50;border-bottom:1px solid var(--line)}
+    .nav{display:flex;align-items:center;gap:16px;justify-content:space-between;padding:12px 0}
+    .nav .left{display:flex;align-items:center;gap:12px}
+    .logo{width:40px;height:40px;border-radius:50%;background:linear-gradient(135deg,#7c9cff,#86efac);display:grid;place-items:center;color:#0b0c10;font-weight:800;letter-spacing:.3px}
+    .title{font-weight:800;font-size:18px}
+    .links{display:flex;flex-wrap:wrap;gap:10px}
+    .chip{background:var(--chip);border:1px solid var(--line);padding:8px 12px;border-radius:999px;color:var(--ink);font-size:14px}
+    .grid{display:grid;grid-template-columns:repeat(12,1fr);gap:var(--gap)}
+    section{padding:48px 0;border-bottom:1px solid var(--line)}
+    h1{font-size:44px;line-height:1.05;margin:12px 0 8px}
+    h2{font-size:28px;margin:0 0 16px}
+    h3{font-size:20px;margin:8px 0}
+    p{color:var(--muted);line-height:1.7}
+    .hero{display:grid;grid-template-columns:1.1fr .9fr;gap:24px;align-items:center}
+    .panel{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:20px}
+    .kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:16px}
+    .kpi{background:var(--chip);border:1px solid var(--line);border-radius:14px;padding:14px;text-align:center}
+    .kpi .num{font-weight:800;font-size:22px}
+    .tagline{color:var(--muted);font-weight:500}
+    .btn{display:inline-flex;align-items:center;gap:8px;background:var(--brand);color:#0b0c10;padding:10px 14px;border-radius:12px;border:0;font-weight:700}
+    .btn.secondary{background:transparent;color:var(--ink);border:1px solid var(--line)}
+    .card{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:18px}
+    .card .eyebrow{font-size:12px;color:var(--muted);letter-spacing:.08em;text-transform:uppercase}
+    .cards{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--gap)}
+    .timeline{position:relative}
+    .item{display:grid;grid-template-columns:160px 1fr;gap:16px;padding:16px 0;border-bottom:1px dashed var(--line)}
+    .item:last-child{border-bottom:0}
+    .pill{display:inline-block;padding:3px 8px;border:1px solid var(--line);border-radius:8px;background:var(--chip);color:var(--muted);font-size:12px}
+    details{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:12px}
+    summary{cursor:pointer;font-weight:700}
+    ul{padding-left:18px}
+    .cols{columns:2;column-gap:24px}
+    @media(max-width:1000px){.hero{grid-template-columns:1fr}.cards{grid-template-columns:1fr 1fr}.kpis{grid-template-columns:repeat(2,1fr)}.item{grid-template-columns:1fr}.cols{columns:1}}
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container nav">
+      <div class="left">
+        <div class="logo">DS</div>
+        <div>
+          <div class="title">Dipayan Saha</div>
+          <div class="tagline">LLM‑Driven Hardware Security • SoC Verification</div>
+        </div>
+      </div>
+      <nav class="links">
+        <a class="chip" href="#about">About</a>
+        <a class="chip" href="#projects">Projects</a>
+        <a class="chip" href="#publications">Publications</a>
+        <a class="chip" href="#experience">Experience</a>
+        <a class="chip" href="#skills">Skills</a>
+        <a class="chip" href="#talks">Talks & Media</a>
+        <a class="chip" href="#contact">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <!-- Hero / About -->
+    <section id="about">
+      <div class="hero">
+        <div>
+          <h1>Researcher at the intersection of <span style="background:linear-gradient(90deg,#7c9cff,#86efac);-webkit-background-clip:text;background-clip:text;color:transparent">AI & Hardware Security</span></h1>
+          <p>
+            I specialize in <b>LLM‑driven</b> and <b>agentic</b> workflows for <b>SoC security verification</b> — spanning
+            security Q&A, asset identification, threat modeling, property & testbench generation, vulnerability detection,
+            and dataset creation. My work (SV‑LLM, VeriChat, SoCureLLM, ThreatLens) targets <b>trustworthy
+            microelectronics</b> as a national priority.
+          </p>
+          <div style="display:flex;gap:12px;flex-wrap:wrap;margin:18px 0 8px">
+            <a class="btn" href="mailto:dsaha@ufl.edu">Contact me</a>
+            <a class="btn secondary" href="https://github.com/sahadipayan" target="_blank" rel="noreferrer">GitHub</a>
+            <a class="btn secondary" href="http://www.linkedin.com/in/dipayan-saha-311708127" target="_blank" rel="noreferrer">LinkedIn</a>
+            <a class="btn secondary" href="https://scholar.google.com/citations?user=SGJ0kqgAAAAJ&hl=en" target="_blank" rel="noreferrer">Google Scholar</a>
+          </div>
+          <div class="kpis">
+            <div class="kpi"><div class="num">19</div><div class="lab">Publications</div></div>
+            <div class="kpi"><div class="num">291</div><div class="lab">Citations (Oct ’25)</div></div>
+            <div class="kpi"><div class="num">4</div><div class="lab">Flagship Projects</div></div>
+            <div class="kpi"><div class="num">3×</div><div class="lab">NSF Travel Grants</div></div>
+          </div>
+        </div>
+        <div class="panel">
+          <h3 style="margin-top:0">Education</h3>
+          <div class="item" style="border:0;padding:8px 0">
+            <div><span class="pill">Ph.D., ECE</span></div>
+            <div>University of Florida — <b>3.90/4.00</b><br/>Thesis: <i>Large Language Model‑Driven Security Verification of System‑on‑Chips</i><br/>Supervisor: Prof. Farimah Farahmandi<br/>Final Exam: <b>September 18, 2025</b></div>
+          </div>
+          <div class="item" style="border:0;padding:8px 0">
+            <div><span class="pill">M.Sc., ECE</span></div>
+            <div>University of Florida — <b>3.89/4.00</b> (May 2024)</div>
+          </div>
+          <div class="item" style="border:0;padding:8px 0">
+            <div><span class="pill">B.Sc., EEE</span></div>
+            <div>BUET, Dhaka — <b>3.66/4.00</b> (Dec 2018)</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Projects / Research -->
+    <section id="projects">
+      <h2>Research & Flagship Projects</h2>
+      <div class="cards">
+        <div class="card">
+          <div class="eyebrow">Agentic LLM • 2025</div>
+          <h3>SV‑LLM</h3>
+          <p>Multi‑agent assistant for SoC security: Q&A, asset identification, threat modeling, test plan &
+            testbench generation, property generation, bug detection.</p>
+        </div>
+        <div class="card">
+          <div class="eyebrow">RAG + Evaluation • 2025</div>
+          <h3>VeriChat</h3>
+          <p>Multi‑retriever chatbot for hardware security verification with structured data, algorithmic, and app layers.</p>
+        </div>
+        <div class="card">
+          <div class="eyebrow">Policy Gen • HOST’25</div>
+          <h3>SoCureLLM</h3>
+          <p>LLM‑driven large‑scale SoC security verification and <b>policy generation</b>; tackles vulnerabilities across SoC blocks.</p>
+        </div>
+        <div class="card">
+          <div class="eyebrow">Threat Modeling • VTS’25</div>
+          <h3>ThreatLens</h3>
+          <p>LLM‑guided threat modeling + security test plan generation with interactive flows.</p>
+        </div>
+        <div class="card">
+          <div class="eyebrow">Fine‑tuning • VTS’25</div>
+          <h3>BugWhisperer</h3>
+          <p>Fine‑tuned LLMs for <b>SoC hardware vulnerability detection</b> in RTL (Verilog).</p>
+        </div>
+        <div class="card">
+          <div class="eyebrow">PD‑PSC • ISCAS’25</div>
+          <h3>Power Side‑Channel @ Layout</h3>
+          <p>GNN‑based holistic PSC leakage assessment at physical design; cell‑level (PDI‑PSC) with MLP.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Publications -->
+    <section id="publications">
+      <h2>Publications</h2>
+      <p class="muted">Numbers reflect your CV snapshot (updated Oct 2025).</p>
+      <details open>
+        <summary>Journals (3)</summary>
+        <ol>
+          <li>LLM for SoC Security: A Paradigm Shift — <b>IEEE Access, 2024</b>. doi:10.1109/ACCESS.2024.3427369.</li>
+          <li>Prediction of instantaneous likeability of advertisements — <b>Cognitive Computation and Systems, 2021</b>.</li>
+          <li>Comprehensive NILM Framework with Capsule Networks — <b>IEEE Access, 2020</b>.</li>
+        </ol>
+      </details>
+      <details>
+        <summary>Conference Proceedings (13)</summary>
+        <ol>
+          <li>ThreatLens — <b>VTS 2025</b>, doi:10.1109/VTS65138.2025.11022932.</li>
+          <li>BugWhisperer — <b>VTS 2025</b>, doi:10.1109/VTS65138.2025.11022958.</li>
+          <li>PD‑PSC — <b>ISCAS 2025</b>, doi:10.1109/ISCAS56072.2025.11043283.</li>
+          <li>Vulnerabilities in HDL via fine‑tuned LLM — <b>GOMACTech 2025</b>.</li>
+          <li>SoCureLLM — <b>HOST 2025</b>, doi:10.1109/HOST64725.2025.11050068.</li>
+          <li>Vulnerable Hardware Database — <b>HOST 2024</b>, doi:10.1109/HOST55342.2024.10545393.</li>
+          <li>Trusting the Machine: LLM‑generated RTL — <b>MLCAD 2025</b>.</li>
+          <li>DL‑SCADS (post‑silicon PSC) — <b>Asilomar 2024</b>, doi:10.1109/IEEECONF60004.2024.10942736.</li>
+          <li>LLM4Sec — <b>GOMACTech 2024</b>.</li>
+          <li>Eye‑gaze video navigation — <b>R10‑HTC 2019</b>.</li>
+          <li>Malaria detection with CNN/CapsNet — <b>SPICSCON 2019</b> (Best Paper).</li>
+          <li>Eye‑gaze robotic car — <b>R10‑HTC 2018</b>.</li>
+          <li>Mixed Gaussian‑Impulse noise reduction — <b>ICECE 2018</b>.</li>
+        </ol>
+      </details>
+      <details>
+        <summary>Preprints (3)</summary>
+        <ol>
+          <li>SV‑LLM — arXiv:2506.20415 (2025).</li>
+          <li>Secure Physical Design — ePrint 2022/891.</li>
+          <li>PQC‑SEP — ePrint 2022/527.</li>
+        </ol>
+      </details>
+      <details>
+        <summary>Under Review (4) & Book Chapter</summary>
+        <ul>
+          <li>VeriChat (2025), BugBench (2025), Threat2SVA (2025), LAsset (2025).</li>
+          <li><b>Book Chapter</b>: LLM‑Based Security Verification: Vulnerability Detection and Analysis — in <i>LLM for SoC Security</i>, Springer (upcoming).</li>
+        </ul>
+      </details>
+    </section>
+
+    <!-- Experience -->
+    <section id="experience">
+      <h2>Experience</h2>
+      <div class="timeline">
+        <div class="item">
+          <div>Jan 2021 — Aug 2025</div>
+          <div>
+            <h3>Graduate Research Assistant — Florida Institute for Cybersecurity (FICS), UF</h3>
+            <p>LLM‑driven SoC security verification; SV‑LLM, VeriChat, SoCureLLM, ThreatLens; vulnerability detection; HDL security datasets; LLM‑driven testbench generation; analysis of LLM‑generated RTL.</p>
+          </div>
+        </div>
+        <div class="item">
+          <div>May — Aug 2024</div>
+          <div>
+            <h3>Research Intern — ChipStack Inc.</h3>
+            <p>Knowledge‑distillation based SVA syntax correction; 20k SVA dataset; training & evaluation pipelines; assertion quality benchmarks.</p>
+          </div>
+        </div>
+        <div class="item">
+          <div>Mar — Dec 2020</div>
+          <div>
+            <h3>Assistant Engineer — DESCO, Dhaka</h3>
+            <p>Power distribution engineering and operations.</p>
+          </div>
+        </div>
+        <div class="item">
+          <div>Jan 2019 — Feb 2020</div>
+          <div>
+            <h3>Lecturer — Sonargaon University</h3>
+            <p>Full‑time teaching in EEE; supervised projects; delivered core EEE curricula.</p>
+          </div>
+        </div>
+        <div class="item">
+          <div>Spring 2025</div>
+          <div>
+            <h3>Supervised Teaching Assistant — EEL6935 (CAD for HW Security Validation), UF</h3>
+            <p>Course support under Prof. Farahmandi.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Skills -->
+    <section id="skills">
+      <h2>Technical Skills</h2>
+      <div class="cards">
+        <div class="card">
+          <h3>LLMs & Agentic</h3>
+          <p>OpenAI API, Hugging Face, LangChain, LangGraph, CrewAI; FAISS, Pinecone, Weaviate, ChromaDB.</p>
+        </div>
+        <div class="card">
+          <h3>AI/ML</h3>
+          <p>PyTorch, TensorFlow, Keras, Scikit‑Learn; MLP, CNN, LSTM, GNN, Transformers; W&B.</p>
+        </div>
+        <div class="card">
+          <h3>EDA & HDLs</h3>
+          <p>Verilog/VHDL/SystemVerilog; Synopsys DC/VCS/PT/Formality; Cadence Innovus/Virtuoso/Voltus/Jasper; Xilinx Vivado; ModelSim.</p>
+        </div>
+        <div class="card">
+          <h3>Dev & MLOps</h3>
+          <p>Python, MATLAB, C; Bash, Tcl, JavaScript; React, Streamlit, Flask/FastAPI, Docker; GCP, AWS.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Talks & Media -->
+    <section id="talks">
+      <h2>Talks, Demos & Media</h2>
+      <div class="grid">
+        <div class="card" style="grid-column: span 6">
+          <h3>Technical Talks</h3>
+          <ul>
+            <li>MEST Webinar (Sep 10, 2025): The Agentic Age — LLMs in Hardware Security Verification.</li>
+            <li>CAD4Sec Workshop @ DAC 2023: ChatGPT in SoC Security.</li>
+            <li>IEEE SPS Bangladesh (2019): Research & Funding Opportunities.</li>
+          </ul>
+        </div>
+        <div class="card" style="grid-column: span 6">
+          <h3>Hardware Demos</h3>
+          <ul>
+            <li>LLM for HW Security Verification — AICAD4Sec @ DAC 2025.</li>
+            <li>SV‑LLM demo — HOST 2025.</li>
+            <li>PD‑PSC (physical design PSC) — HOST 2023.</li>
+          </ul>
+        </div>
+        <div class="card" style="grid-column: span 6">
+          <h3>Posters</h3>
+          <ul>
+            <li>SoCureLLM — DAC 2024.</li>
+            <li>SVA Syntax KD — DAC 2025 (Accepted).</li>
+            <li>Quantitative PSC (pre‑silicon) — Florida Semiconductor Week 2023.</li>
+          </ul>
+        </div>
+        <div class="card" style="grid-column: span 6">
+          <h3>Media Coverage (Semiconductor Engineering)</h3>
+          <ul>
+            <li><a target="_blank" rel="noreferrer" href="https://semiengineering.com/hw-security-multi-agent-ai-assistant-leveraging-llms-to-automate-key-stages-of-soc-security-verification-u-of-florida/">Multi‑Agent HW Security Assistant</a></li>
+            <li><a target="_blank" rel="noreferrer" href="https://semiengineering.com/llm-based-agentic-framework-automating-hw-security-threat-modeling-and-test-plan-generation-u-of-florida/">Threat Modeling & Test Plans</a></li>
+            <li><a target="_blank" rel="noreferrer" href="https://semiengineering.com/an-llm-approach-for-large-scale-soc-security-verification-and-policy-generation-u-of-florida">Large‑Scale SoC Verification</a></li>
+            <li><a target="_blank" rel="noreferrer" href="https://semiengineering.com/tools-needed-to-track-catalog-hardware-vulnerabilities">Tracking HW Vulnerabilities</a></li>
+            <li><a target="_blank" rel="noreferrer" href="https://semiengineering.com/secure-physical-design-roadmap-enabling-end-to-end-trustworthy-ic-design-flow">Secure Physical Design Roadmap</a></li>
+            <li><a target="_blank" rel="noreferrer" href="https://semiengineering.com/fics-research-institute-detailed-assessment-of-the-pqc-candidates-to-power-side-channel-attacks/">PQC Side‑Channel Assessment</a></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- Achievements & Service -->
+    <section id="achievements">
+      <h2>Achievements & Service</h2>
+      <div class="grid">
+        <div class="card" style="grid-column: span 6">
+          <h3>Awards & Grants</h3>
+          <ul>
+            <li>NSF Travel Grants — 2025, 2024, 2023, 2022</li>
+            <li>HOST 2022 Microelectronics Security Challenge — IP Security Track (Winner)</li>
+            <li>IEEE SPICSCON 2019 — Best Paper Award</li>
+            <li>Dean’s List, Govt. Merit Scholarships (HSC/SSC, Primary/Junior)</li>
+          </ul>
+        </div>
+        <div class="card" style="grid-column: span 6">
+          <h3>Professional Activities</h3>
+          <p>IEEE, ACM, IACR memberships; IEEE YP; IEEE SIGHT; Computer Society.</p>
+          <h3 style="margin-top:12px">Reviewing</h3>
+          <p>Independent: <i>Scientific Reports</i> (2), <i>Journal of Supercomputing</i>, <i>Electrical Engineering</i> (Springer Nature); VLSID 2025. Under supervision: DAC, DATE, ICCAD, ICCD, TODAES.</p>
+        </div>
+        <div class="card" style="grid-column: span 6">
+          <h3>Mentorship</h3>
+          <ul>
+            <li>Gabriel A. Hernandez — data extraction pipeline</li>
+            <li>Pavan Sai Nalluri — frontend for security chatbot</li>
+            <li>Saibatapa Sen — security property annotation</li>
+            <li>Khan Thamid Hasan — LLM testbench generation</li>
+            <li>Md. Ajoad Hasan — LLM asset identification</li>
+            <li>Rasin M. Ihtemam — LLM‑guided RTL generation</li>
+            <li>Md. Touhidul Islam — data pipelines for chatbots</li>
+          </ul>
+        </div>
+        <div class="card" style="grid-column: span 6">
+          <h3>Volunteering</h3>
+          <ul>
+            <li>Conference Secretary, IEEE TENSYMP 2020</li>
+            <li>Membership Dev. Coordinator, IEEE SPS BD Chapter 2020</li>
+            <li>Session Management, SPICSCON 2019</li>
+            <li>IEEE Bangladesh Section Volunteer (2015–2020)</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact -->
+    <section id="contact">
+      <h2>Get in touch</h2>
+      <div class="grid">
+        <div class="card" style="grid-column: span 6">
+          <h3>Email</h3>
+          <p><a href="mailto:dsaha@ufl.edu">dsaha@ufl.edu</a></p>
+          <h3>Profiles</h3>
+          <p>
+            <a target="_blank" rel="noreferrer" href="http://www.linkedin.com/in/dipayan-saha-311708127">LinkedIn</a> •
+            <a target="_blank" rel="noreferrer" href="https://github.com/sahadipayan">GitHub</a> •
+            <a target="_blank" rel="noreferrer" href="https://scholar.google.com/citations?user=SGJ0kqgAAAAJ&hl=en">Google Scholar</a>
+          </p>
+        </div>
+        <div class="card" style="grid-column: span 6">
+          <h3>Current Focus</h3>
+          <p>Agentic LLM pipelines for SoC security verification; robust evaluation; industrialization of research (Caspia Technologies — Senior R&D Engineer, offer accepted).</p>
+        </div>
+      </div>
+    </section>
+
+    <section style="border:0;padding:24px 0 60px">
+      <p style="color:var(--muted);font-size:13px">Built from CV snapshot • Updated Oct 2025 • © Dipayan Saha</p>
+    </section>
+  </main>
+
+  <script>
+    // Smooth scroll for header chips
+    document.querySelectorAll('a.chip[href^="#"]').forEach(a=>{
+      a.addEventListener('click', e=>{e.preventDefault(); document.querySelector(a.getAttribute('href')).scrollIntoView({behavior:'smooth'});});
+    });
+  </script>
+</body>
+</html>
