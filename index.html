@@ -8,10 +8,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
   <style>
-    :root{
-      --bg:#0b0c10; --panel:#12141a; --ink:#e8eef5; --muted:#a8b3c7; --brand:#7c9cff; --accent:#86efac; --chip:#1e2430; --line:#222837;
-      --radius:16px; --gap:16px; --max:1100px;
-    }
+    :root{--bg:#0b0c10; --panel:#12141a; --ink:#e8eef5; --muted:#a8b3c7; --brand:#7c9cff; --accent:#86efac; --chip:#1e2430; --line:#222837; --radius:16px; --gap:16px; --max:1100px;}
     *{box-sizing:border-box}
     html,body{margin:0;padding:0;font-family:Inter,system-ui,Segoe UI,Roboto,Helvetica,Arial,sans-serif;background:var(--bg);color:var(--ink)}
     a{color:var(--brand);text-decoration:none}
@@ -26,6 +23,8 @@
     .chip{background:var(--chip);border:1px solid var(--line);padding:8px 12px;border-radius:999px;color:var(--ink);font-size:14px}
     .grid{display:grid;grid-template-columns:repeat(12,1fr);gap:var(--gap)}
     section{padding:48px 0;border-bottom:1px solid var(--line)}
+    .page{display:none}
+    .page.active{display:block}
     h1{font-size:44px;line-height:1.05;margin:12px 0 8px}
     h2{font-size:28px;margin:0 0 16px}
     h3{font-size:20px;margin:8px 0}
@@ -50,6 +49,17 @@
     ul{padding-left:18px}
     .cols{columns:2;column-gap:24px}
     @media(max-width:1000px){.hero{grid-template-columns:1fr}.cards{grid-template-columns:1fr 1fr}.kpis{grid-template-columns:repeat(2,1fr)}.item{grid-template-columns:1fr}.cols{columns:1}}
+    /* News ticker */
+    .ticker{background:var(--chip);border:1px solid var(--line);border-radius:14px;padding:12px;margin:8px 0 16px}
+    .ticker-header{font-weight:800;margin-bottom:8px}
+    .ticker-viewport{height:220px;overflow:hidden;position:relative;border-radius:10px}
+    .ticker-list{list-style:none;margin:0;padding:0}
+    .ticker-list li{padding:10px 6px;border-bottom:1px dashed var(--line);color:var(--ink)}
+    .ticker-list li:last-child{border-bottom:0}
+    .ticker-track{display:block}
+    .ticker-animate{animation:ticker var(--ticker-duration,30s) linear infinite}
+    .ticker-viewport:hover .ticker-animate{animation-play-state:paused}
+    @keyframes ticker{0%{transform:translateY(0)}100%{transform:translateY(-50%)}}
   </style>
 </head>
 <body>
@@ -63,29 +73,25 @@
         </div>
       </div>
       <nav class="links">
-        <a class="chip" href="#about">About</a>
-        <a class="chip" href="#projects">Projects</a>
-        <a class="chip" href="#publications">Publications</a>
-        <a class="chip" href="#experience">Experience</a>
-        <a class="chip" href="#skills">Skills</a>
-        <a class="chip" href="#talks">Talks & Media</a>
-        <a class="chip" href="#contact">Contact</a>
+        <a class="chip navlink" href="/">Home</a>
+        <a class="chip navlink" href="/projects">Projects</a>
+        <a class="chip navlink" href="/publications">Publications</a>
+        <a class="chip navlink" href="/experience">Experience</a>
+        <a class="chip navlink" href="/skills">Skills</a>
+        <a class="chip navlink" href="/talks">Talks & Media</a>
+        <a class="chip navlink" href="/achievements">Achievements</a>
+        <a class="chip navlink" href="/contact">Contact</a>
       </nav>
     </div>
   </header>
 
   <main class="container">
     <!-- Hero / About -->
-    <section id="about">
+    <section id="home" class="page active" data-route="/">
       <div class="hero">
         <div>
           <h1>Researcher at the intersection of <span style="background:linear-gradient(90deg,#7c9cff,#86efac);-webkit-background-clip:text;background-clip:text;color:transparent">AI & Hardware Security</span></h1>
-          <p>
-            I specialize in <b>LLM‑driven</b> and <b>agentic</b> workflows for <b>SoC security verification</b> — spanning
-            security Q&A, asset identification, threat modeling, property & testbench generation, vulnerability detection,
-            and dataset creation. My work (SV‑LLM, VeriChat, SoCureLLM, ThreatLens) targets <b>trustworthy
-            microelectronics</b> as a national priority.
-          </p>
+          <p><b>Career summary:</b> I build practical, industry‑ready <b>agentic LLM systems</b> that automate end‑to‑end <b>SoC security verification</b> — from security asset identification to threat modeling and test plan/testbench generation. My focus is shipping robust tools (SV‑LLM, VeriChat, SoCureLLM, ThreatLens) that advance <b>trustworthy microelectronics</b> at scale.</p>
           <div style="display:flex;gap:12px;flex-wrap:wrap;margin:18px 0 8px">
             <a class="btn" href="mailto:dsaha@ufl.edu">Contact me</a>
             <a class="btn secondary" href="https://github.com/sahadipayan" target="_blank" rel="noreferrer">GitHub</a>
@@ -100,6 +106,13 @@
           </div>
         </div>
         <div class="panel">
+          <img src="portrait.jpg" alt="Dipayan Saha" style="width:100%;border-radius:14px;aspect-ratio:1/1;object-fit:cover;margin-bottom:12px"/>
+          <div class="ticker">
+            <div class="ticker-header">Updates</div>
+            <div class="ticker-viewport">
+              <div id="tickerTrack" class="ticker-track ticker-animate"></div>
+            </div>
+          </div>
           <h3 style="margin-top:0">Education</h3>
           <div class="item" style="border:0;padding:8px 0">
             <div><span class="pill">Ph.D., ECE</span></div>
@@ -118,7 +131,7 @@
     </section>
 
     <!-- Projects / Research -->
-    <section id="projects">
+    <section id="projects" class="page" data-route="/projects">
       <h2>Research & Flagship Projects</h2>
       <div class="cards">
         <div class="card">
@@ -156,7 +169,7 @@
     </section>
 
     <!-- Publications -->
-    <section id="publications">
+    <section id="publications" class="page" data-route="/publications">
       <h2>Publications</h2>
       <p class="muted">Numbers reflect your CV snapshot (updated Oct 2025).</p>
       <details open>
@@ -203,7 +216,7 @@
     </section>
 
     <!-- Experience -->
-    <section id="experience">
+    <section id="experience" class="page" data-route="/experience">
       <h2>Experience</h2>
       <div class="timeline">
         <div class="item">
@@ -245,7 +258,7 @@
     </section>
 
     <!-- Skills -->
-    <section id="skills">
+    <section id="skills" class="page" data-route="/skills">
       <h2>Technical Skills</h2>
       <div class="cards">
         <div class="card">
@@ -268,7 +281,7 @@
     </section>
 
     <!-- Talks & Media -->
-    <section id="talks">
+    <section id="talks" class="page" data-route="/talks">
       <h2>Talks, Demos & Media</h2>
       <div class="grid">
         <div class="card" style="grid-column: span 6">
@@ -310,7 +323,7 @@
     </section>
 
     <!-- Achievements & Service -->
-    <section id="achievements">
+    <section id="achievements" class="page" data-route="/achievements">
       <h2>Achievements & Service</h2>
       <div class="grid">
         <div class="card" style="grid-column: span 6">
@@ -329,6 +342,18 @@
           <p>Independent: <i>Scientific Reports</i> (2), <i>Journal of Supercomputing</i>, <i>Electrical Engineering</i> (Springer Nature); VLSID 2025. Under supervision: DAC, DATE, ICCAD, ICCD, TODAES.</p>
         </div>
         <div class="card" style="grid-column: span 6">
+          <h3>Mentorship</h3>
+          <ul>
+            <li>Gabriel A. Hernandez — data extraction pipeline</li>
+            <li>Pavan Sai Nalluri — frontend for security chatbot</li>
+            <li>Saibatapa Sen — security property annotation</li>
+            <li>Khan Thamid Hasan — LLM testbench generation</li>
+            <li>Md. Ajoad Hasan — LLM asset identification</li>
+            <li>Rasin M. Ihtemam — LLM‑guided RTL generation</li>
+            <li>Md. Touhidul Islam — data pipelines for chatbots</li>
+          </ul>
+        </div>
+        <div class="card" style="grid-column: span 6">
           <h3>Volunteering</h3>
           <ul>
             <li>Conference Secretary, IEEE TENSYMP 2020</li>
@@ -341,7 +366,7 @@
     </section>
 
     <!-- Contact -->
-    <section id="contact">
+    <section id="contact" class="page" data-route="/contact">
       <h2>Get in touch</h2>
       <div class="grid">
         <div class="card" style="grid-column: span 6">
@@ -361,16 +386,43 @@
       </div>
     </section>
 
-    <section style="border:0;padding:24px 0 60px">
-      <p style="color:var(--muted);font-size:13px">Built from CV snapshot • Updated Oct 2025 • © Dipayan Saha</p>
-    </section>
+    
   </main>
 
   <script>
-    // Smooth scroll for header chips
-    document.querySelectorAll('a.chip[href^="#"]').forEach(a=>{
-      a.addEventListener('click', e=>{e.preventDefault(); document.querySelector(a.getAttribute('href')).scrollIntoView({behavior:'smooth'});});
+    // --- Simple client-side router for section pages ---
+    function showRoute(path){
+      document.querySelectorAll('.page').forEach(sec=>sec.classList.remove('active'));
+      const target = document.querySelector(`.page[data-route="${path}"]`) || document.querySelector('.page[data-route="/"]');
+      if(target){ target.classList.add('active'); window.scrollTo({top:0, behavior:'instant'}); }
+      // highlight current nav
+      document.querySelectorAll('.navlink').forEach(a=>{
+        a.classList.toggle('active', a.getAttribute('href')===path);
+      });
+    }
+    document.querySelectorAll('.navlink').forEach(a=>{
+      a.addEventListener('click', e=>{ e.preventDefault(); const path=a.getAttribute('href'); history.pushState({},'',path); showRoute(path); });
     });
+    window.addEventListener('popstate',()=> showRoute(location.pathname));
+    showRoute(location.pathname);
+
+    const newsItems = [
+      '🎓 Successfully defended PhD (Sep 18, 2025).',
+      '🧪 Two papers at IEEE VTS 2025: ThreatLens & BugWhisperer.',
+      '📘 HOST 2025: SoCureLLM accepted for publication.',
+      '🧑‍🏫 MEST Webinar talk: The Agentic Age (Sep 10, 2025).',
+      '📌 DAC 2025 poster accepted: SVA Syntax Correction with Knowledge Distillation.',
+      '🏢 Joining Caspia Technologies as Senior R&D Engineer (Nov 3, 2025).'
+    ];
+
+    const track = document.getElementById('tickerTrack');
+    function renderTicker(items){
+      const ul = arr => '<ul class="ticker-list">' + arr.map(x=>`<li>${x}</li>`).join('') + '</ul>';
+      track.innerHTML = ul(items) + ul(items); // duplicate for seamless loop
+      const duration = Math.max(20, items.length * 4); // seconds
+      track.style.setProperty('--ticker-duration', duration + 's');
+    }
+    renderTicker(newsItems);
   </script>
 </body>
 </html>
