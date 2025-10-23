@@ -21,6 +21,7 @@
     .title{font-weight:800;font-size:18px}
     .links{display:flex;flex-wrap:wrap;gap:10px}
     .chip{background:var(--chip);border:1px solid var(--line);padding:8px 12px;border-radius:999px;color:var(--ink);font-size:14px}
+    .navlink.active{background:var(--brand);color:#0b0c10;border-color:transparent}
     .grid{display:grid;grid-template-columns:repeat(12,1fr);gap:var(--gap)}
     section{padding:48px 0;border-bottom:1px solid var(--line)}
     .page{display:none}
@@ -54,7 +55,7 @@
     .table th,.table td{padding:12px 14px;text-align:left;border-bottom:1px solid var(--line);vertical-align:top}
     .table thead th{background:#0f1117;color:#c9d4e5;font-weight:700;letter-spacing:.02em}
     .table tr:last-child td{border-bottom:0}
-    .badge{display:inline-block;padding:2px 8px;border-radius:999px;border:1px solid var(--line);background:var(--chip);font-size:12px;color:var(--muted)}.cards{grid-template-columns:1fr 1fr}.kpis{grid-template-columns:repeat(2,1fr)}.item{grid-template-columns:1fr}.cols{columns:1}
+    .badge{display:inline-block;padding:2px 8px;border-radius:999px;border:1px solid var(--line);background:var(--chip);font-size:12px;color:var(--muted)}.cards{grid-template-columns:1fr 1fr}.kpis{grid-template-columns:repeat(2,1fr)}.item{grid-template-columns:1fr}.cols{columns:1}}
     /* News ticker */
     .ticker{background:var(--chip);border:1px solid var(--line);border-radius:14px;padding:12px;margin:8px 0 16px}
     .ticker-header{font-weight:800;margin-bottom:8px}
@@ -356,6 +357,7 @@
             <li>Khan Thamid Hasan — LLM testbench generation</li>
             <li>Md. Ajoad Hasan — LLM asset identification</li>
             <li>Rasin M. Ihtemam — LLM‑guided RTL generation</li>
+            <li>Md. Touhidul Islam — data pipelines for chatbots</li>
           </ul>
         </div>
         <div class="card" style="grid-column: span 6">
@@ -395,13 +397,16 @@
       <!-- Reviews -->
     <section id="reviews" class="page" data-route="/reviews">
       <h2>Review Activities</h2>
-      <p class="muted">A snapshot of my judging and peer‑review service.</p>
+      <p class="muted">A snapshot of my judging and peer‑review service. Journal metrics (Impact Factor, CiteScore) are listed where available and should be periodically refreshed.</p>
 
       <div class="card" style="margin-bottom:16px">
         <h3>Hackathons — Judge</h3>
         <ul>
+          <li><b>AI Days Hackathon</b> — Judge (2025). <span class="badge">FAU</span> <span class="badge">Industry & Student Teams</span></li>
           <li><b>IEEE EMBS Design‑a‑thon</b> — Judge/Mentor (Year). <span class="badge">IEEE EMBS</span></li>
           <li><b>Gator Hack IV</b> — Judge (Year). <span class="badge">UF</span></li>
+          <li><b>AI‑HDL Challenge</b> — Mentor/Reviewer (Year). <span class="badge">LLM for HDL</span></li>
+          <li><b>ICCD 2025 LLM‑HDL Challenge</b> — Judge/Mentor (2025).</li>
         </ul>
       </div>
 
@@ -463,43 +468,54 @@
   </main>
 
   <script>
-    // --- Simple client-side router for section pages ---
-    function showRoute(path){
-      document.querySelectorAll('.page').forEach(sec=>sec.classList.remove('active'));
-      const target = document.querySelector(`.page[data-route="${path}"]`) || document.querySelector('.page[data-route="/"]');
-      if(target){ target.classList.add('active'); window.scrollTo({top:0, behavior:'instant'}); }
-      // highlight current nav
-      document.querySelectorAll('.navlink').forEach(a=>{
-      a.addEventListener('click', e=>{ e.preventDefault(); const path=a.getAttribute('href'); history.pushState({},'',path); showRoute(path); });
-    });
-    // allow deep linking on first load and when navigating directly to /reviews etc.
-    showRoute(location.pathname);
-    window.addEventListener('popstate',()=> showRoute(location.pathname));
-    }
+  // Lightweight client-side router (one-time setup)
+  function showRoute(path){
+    // 1) Show the right page
+    document.querySelectorAll('.page').forEach(sec=>sec.classList.remove('active'));
+    const target = document.querySelector(`.page[data-route="${path}"]`) || document.querySelector('.page[data-route="/"]');
+    if(target){ target.classList.add('active'); window.scrollTo({top:0, behavior:'instant'}); }
+
+    // 2) Highlight active nav link
     document.querySelectorAll('.navlink').forEach(a=>{
-      a.addEventListener('click', e=>{ e.preventDefault(); const path=a.getAttribute('href'); history.pushState({},'',path); showRoute(path); });
+      a.classList.toggle('active', a.getAttribute('href')===path);
     });
-    window.addEventListener('popstate',()=> showRoute(location.pathname));
-    showRoute(location.pathname);
+  }
 
-    // --- News ticker data (edit this array to update) ---
-    const newsItems = [
-      '🎓 Successfully defended PhD (Sep 18, 2025).',
-      '🧪 Two papers at IEEE VTS 2025: ThreatLens & BugWhisperer.',
-      '📘 HOST 2025: SoCureLLM accepted for publication.',
-      '🧑‍🏫 MEST Webinar talk: The Agentic Age (Sep 10, 2025).',
-      '📌 DAC 2025 poster accepted: SVA Syntax Correction with Knowledge Distillation.',
-      '🏢 Joining Caspia Technologies as Senior R&D Engineer (Nov 3, 2025).'
-    ];
+  // Attach nav listeners ONCE (do not re-add inside showRoute)
+  document.querySelectorAll('.navlink').forEach(a=>{
+    a.addEventListener('click', e=>{
+      e.preventDefault();
+      const path = a.getAttribute('href');
+      history.pushState({}, '', path);
+      showRoute(path);
+    });
+  });
 
-    const track = document.getElementById('tickerTrack');
-    function renderTicker(items){
-      const ul = arr => '<ul class="ticker-list">' + arr.map(x=>`<li>${x}</li>`).join('') + '</ul>';
-      track.innerHTML = ul(items) + ul(items); // duplicate for seamless loop
-      const duration = Math.max(20, items.length * 4); // seconds
-      track.style.setProperty('--ticker-duration', duration + 's');
-    }
-    renderTicker(newsItems);
-  </script>
+  // Back/forward buttons
+  window.addEventListener('popstate', ()=> showRoute(location.pathname));
+
+  // Initial render
+  showRoute(location.pathname);
+
+  // --- News ticker data (edit this array to update) ---
+  const newsItems = [
+    '🎓 Successfully defended PhD (Sep 18, 2025).',
+    '🧪 Two papers at IEEE VTS 2025: ThreatLens & BugWhisperer.',
+    '📘 HOST 2025: SoCureLLM accepted for publication.',
+    '🧑‍🏫 MEST Webinar talk: The Agentic Age (Sep 10, 2025).',
+    '📌 DAC 2025 poster accepted: SVA Syntax Correction with Knowledge Distillation.',
+    '🏢 Joining Caspia Technologies as Senior R&D Engineer (Nov 3, 2025).'
+  ];
+
+  const track = document.getElementById('tickerTrack');
+  function renderTicker(items){
+    if(!track) return;
+    const ul = arr => '<ul class="ticker-list">' + arr.map(x=>`<li>${x}</li>`).join('') + '</ul>';
+    track.innerHTML = ul(items) + ul(items); // duplicate for seamless loop
+    const duration = Math.max(20, items.length * 4); // seconds
+    track.style.setProperty('--ticker-duration', duration + 's');
+  }
+  renderTicker(newsItems);
+</script>
 </body>
 </html>
