@@ -49,6 +49,12 @@
     ul{padding-left:18px}
     .cols{columns:2;column-gap:24px}
     @media(max-width:1000px){.hero{grid-template-columns:1fr}.cards{grid-template-columns:1fr 1fr}.kpis{grid-template-columns:repeat(2,1fr)}.item{grid-template-columns:1fr}.cols{columns:1}}
+    /* tables */
+    .table{width:100%;border-collapse:separate;border-spacing:0;background:var(--panel);border:1px solid var(--line);border-radius:14px;overflow:hidden}
+    .table th,.table td{padding:12px 14px;text-align:left;border-bottom:1px solid var(--line);vertical-align:top}
+    .table thead th{background:#0f1117;color:#c9d4e5;font-weight:700;letter-spacing:.02em}
+    .table tr:last-child td{border-bottom:0}
+    .badge{display:inline-block;padding:2px 8px;border-radius:999px;border:1px solid var(--line);background:var(--chip);font-size:12px;color:var(--muted)}.cards{grid-template-columns:1fr 1fr}.kpis{grid-template-columns:repeat(2,1fr)}.item{grid-template-columns:1fr}.cols{columns:1}}
     /* News ticker */
     .ticker{background:var(--chip);border:1px solid var(--line);border-radius:14px;padding:12px;margin:8px 0 16px}
     .ticker-header{font-weight:800;margin-bottom:8px}
@@ -80,6 +86,7 @@
         <a class="chip navlink" href="/skills">Skills</a>
         <a class="chip navlink" href="/talks">Talks & Media</a>
         <a class="chip navlink" href="/achievements">Achievements</a>
+        <a class="chip navlink" href="/reviews">Reviews</a>
         <a class="chip navlink" href="/contact">Contact</a>
       </nav>
     </div>
@@ -91,7 +98,7 @@
       <div class="hero">
         <div>
           <h1>Researcher at the intersection of <span style="background:linear-gradient(90deg,#7c9cff,#86efac);-webkit-background-clip:text;background-clip:text;color:transparent">AI & Hardware Security</span></h1>
-          <p><b>Career summary:</b> I have recently completed my PhD from the Department of Electrical and Computer Engineering at the University of Florida. I have been supervised by Dr. Farimah Farahmandi and also mentored by Dr. Mark Tehranipoor. I build practical, industry‑ready <b>agentic LLM systems</b> that automate end‑to‑end <b>SoC security verification</b> — from security asset identification to threat modeling and test plan/testbench generation. My focus is shipping robust tools (SV‑LLM, SoCureLLM, ThreatLens) that advance <b>trustworthy microelectronics</b> at scale.</p>
+          <p><b>Career summary:</b> I build practical, industry‑ready <b>agentic LLM systems</b> that automate end‑to‑end <b>SoC security verification</b> — from security asset identification to threat modeling and test plan/testbench generation. My focus is shipping robust tools (SV‑LLM, VeriChat, SoCureLLM, ThreatLens) that advance <b>trustworthy microelectronics</b> at scale.</p>
           <div style="display:flex;gap:12px;flex-wrap:wrap;margin:18px 0 8px">
             <a class="btn" href="mailto:dsaha@ufl.edu">Contact me</a>
             <a class="btn secondary" href="https://github.com/sahadipayan" target="_blank" rel="noreferrer">GitHub</a>
@@ -102,6 +109,7 @@
             <div class="kpi"><div class="num">19</div><div class="lab">Publications</div></div>
             <div class="kpi"><div class="num">291</div><div class="lab">Citations (Oct ’25)</div></div>
             <div class="kpi"><div class="num">4</div><div class="lab">Flagship Projects</div></div>
+            <div class="kpi"><div class="num">3×</div><div class="lab">NSF Travel Grants</div></div>
           </div>
         </div>
         <div class="panel">
@@ -115,15 +123,15 @@
           <h3 style="margin-top:0">Education</h3>
           <div class="item" style="border:0;padding:8px 0">
             <div><span class="pill">Ph.D., ECE</span></div>
-            <div>University of Florida — <br/>Thesis: <i>Large Language Model‑Driven Security Verification of System‑on‑Chips</i><br/>Supervisor: Prof. Farimah Farahmandi<br/>Final Exam: <b>September 18, 2025</b></div>
+            <div>University of Florida — <b>3.90/4.00</b><br/>Thesis: <i>Large Language Model‑Driven Security Verification of System‑on‑Chips</i><br/>Supervisor: Prof. Farimah Farahmandi<br/>Final Exam: <b>September 18, 2025</b></div>
           </div>
           <div class="item" style="border:0;padding:8px 0">
             <div><span class="pill">M.Sc., ECE</span></div>
-            <div>University of Florida — (May 2024)</div>
+            <div>University of Florida — <b>3.89/4.00</b> (May 2024)</div>
           </div>
           <div class="item" style="border:0;padding:8px 0">
             <div><span class="pill">B.Sc., EEE</span></div>
-            <div>BUET, Dhaka — (Dec 2018)</div>
+            <div>BUET, Dhaka — <b>3.66/4.00</b> (Dec 2018)</div>
           </div>
         </div>
       </div>
@@ -138,6 +146,11 @@
           <h3>SV‑LLM</h3>
           <p>Multi‑agent assistant for SoC security: Q&A, asset identification, threat modeling, test plan &
             testbench generation, property generation, bug detection.</p>
+        </div>
+        <div class="card">
+          <div class="eyebrow">RAG + Evaluation • 2025</div>
+          <h3>VeriChat</h3>
+          <p>Multi‑retriever chatbot for hardware security verification with structured data, algorithmic, and app layers.</p>
         </div>
         <div class="card">
           <div class="eyebrow">Policy Gen • HOST’25</div>
@@ -332,8 +345,7 @@
         <div class="card" style="grid-column: span 6">
           <h3>Professional Activities</h3>
           <p>IEEE, ACM, IACR memberships; IEEE YP; IEEE SIGHT; Computer Society.</p>
-          <h3 style="margin-top:12px">Reviewing</h3>
-          <p>Independent: <i>Scientific Reports</i> (2), <i>Journal of Supercomputing</i>, <i>Electrical Engineering</i> (Springer Nature); VLSID 2025. Under supervision: DAC, DATE, ICCAD, ICCD, TODAES.</p>
+          <p style="margin-top:8px"><a class="btn secondary" href="/reviews">See full reviewing & judging record →</a></p>
         </div>
         <div class="card" style="grid-column: span 6">
           <h3>Mentorship</h3>
@@ -344,7 +356,6 @@
             <li>Khan Thamid Hasan — LLM testbench generation</li>
             <li>Md. Ajoad Hasan — LLM asset identification</li>
             <li>Rasin M. Ihtemam — LLM‑guided RTL generation</li>
-            <li>Md. Touhidul Islam — data pipelines for chatbots</li>
           </ul>
         </div>
         <div class="card" style="grid-column: span 6">
@@ -358,40 +369,7 @@
         </div>
       </div>
     </section>
-    <!-- Reviews -->
-    <section id="reviews" class="page" data-route="/reviews">
-    <h2>Review Activities</h2>
-    <p class="muted">A snapshot of my judging and peer‑review service. </p>
-    
-    
-    <div class="card" style="margin-bottom:16px">
-    <h3>Hackathons — Judge</h3>
-    <ul>
-    <li><b>IEEE EMBS Design‑a‑thon</b> — Judge/Mentor (Year). <span class="badge">IEEE EMBS</span></li>
-    <li><b>Gator Hack IV</b> — Judge (Year). <span class="badge">UF</span></li>
-    </ul>
-    </div>
-    
-    <div class="card">
-    <h3>Academic Reviewing — Journals</h3>
-    <table class="table">
-    <thead>
-    <tr>
-    <th>Journal</th><th>Role</th><th>Publisher</th><th>Impact Factor</th><th>CiteScore</th><th>Notes</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr>
-    <td>Scientific Reports</td><td>Independent Reviewer (2 papers)</td><td>Nature Portfolio</td><td>—</td><td>—</td><td>General science journal; open access.</td>
-    </tr>
-    <tr>
-    <td>The Journal of Supercomputing</td><td>Independent Reviewer</td><td>Springer</td><td>—</td><td>—</td><td>High‑performance computing.</td>
-    </tr>
-    <tr>
-    <td>Electrical Engineering</td><td>Independent Reviewer</td><td>Springer Nature</td><td>—</td><td>—</td><td>Circuits, systems, devices.</td>
-    </tr>
-    </tbody>
-    </section>
+
     <!-- Contact -->
     <section id="contact" class="page" data-route="/contact">
       <h2>Get in touch</h2>
@@ -406,10 +384,82 @@
             <a target="_blank" rel="noreferrer" href="https://scholar.google.com/citations?user=SGJ0kqgAAAAJ&hl=en">Google Scholar</a>
           </p>
         </div>
+        <div class="card" style="grid-column: span 6">
+          <h3>Current Focus</h3>
+          <p>Agentic LLM pipelines for SoC security verification; robust evaluation; industrialization of research (Caspia Technologies — Senior R&D Engineer, offer accepted).</p>
+        </div>
       </div>
     </section>
 
     
+      <!-- Reviews -->
+    <section id="reviews" class="page" data-route="/reviews">
+      <h2>Review Activities</h2>
+      <p class="muted">A snapshot of my judging and peer‑review service.</p>
+
+      <div class="card" style="margin-bottom:16px">
+        <h3>Hackathons — Judge</h3>
+        <ul>
+          <li><b>IEEE EMBS Design‑a‑thon</b> — Judge/Mentor (Year). <span class="badge">IEEE EMBS</span></li>
+          <li><b>Gator Hack IV</b> — Judge (Year). <span class="badge">UF</span></li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h3>Academic Reviewing — Journals</h3>
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Journal</th><th>Role</th><th>Publisher</th><th>Impact Factor</th><th>CiteScore</th><th>Notes</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Scientific Reports</td><td>Independent Reviewer (2 papers)</td><td>Nature Portfolio</td><td>—</td><td>—</td><td>General science journal; open access.</td>
+            </tr>
+            <tr>
+              <td>The Journal of Supercomputing</td><td>Independent Reviewer</td><td>Springer</td><td>—</td><td>—</td><td>High‑performance computing.</td>
+            </tr>
+            <tr>
+              <td>Electrical Engineering</td><td>Independent Reviewer</td><td>Springer Nature</td><td>—</td><td>—</td><td>Circuits, systems, devices.</td>
+            </tr>
+          </tbody>
+        </table>
+        <p style="margin-top:10px" class="muted">Metrics placeholders “—” can be updated with the latest <i>Journal Citation Reports</i> and <i>Scopus</i> values.</p>
+      </div>
+
+      <div class="card" style="margin-top:16px">
+        <h3>Academic Reviewing — Conferences</h3>
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Venue</th><th>Role</th><th>Area</th><th>CORE Rank / H5</th><th>Year(s)</th><th>Notes</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>VLSID</td><td>Independent Reviewer</td><td>VLSI, Design, EDA</td><td>—</td><td>2025</td><td>38th International Conference on VLSI Design.</td>
+            </tr>
+            <tr>
+              <td>DAC</td><td>Review Support (with Prof. Farahmandi)</td><td>EDA, Systems, Security</td><td>—</td><td>—</td><td>Design Automation Conference.</td>
+            </tr>
+            <tr>
+              <td>DATE</td><td>Review Support</td><td>Design, Test, EDA</td><td>—</td><td>—</td><td>Design, Automation & Test in Europe.</td>
+            </tr>
+            <tr>
+              <td>ICCAD</td><td>Review Support</td><td>CAD, EDA</td><td>—</td><td>—</td><td>International Conference on CAD.</td>
+            </tr>
+            <tr>
+              <td>ICCD</td><td>Review Support</td><td>Circuits & Systems</td><td>—</td><td>—</td><td>International Conference on Computer Design.</td>
+            </tr>
+            <tr>
+              <td>TODAES</td><td>Review Support</td><td>ACM Journal</td><td>—</td><td>—</td><td>ACM Transactions on Design Automation of Electronic Systems.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
   </main>
 
   <script>
@@ -420,8 +470,11 @@
       if(target){ target.classList.add('active'); window.scrollTo({top:0, behavior:'instant'}); }
       // highlight current nav
       document.querySelectorAll('.navlink').forEach(a=>{
-        a.classList.toggle('active', a.getAttribute('href')===path);
-      });
+      a.addEventListener('click', e=>{ e.preventDefault(); const path=a.getAttribute('href'); history.pushState({},'',path); showRoute(path); });
+    });
+    // allow deep linking on first load and when navigating directly to /reviews etc.
+    showRoute(location.pathname);
+    window.addEventListener('popstate',()=> showRoute(location.pathname));
     }
     document.querySelectorAll('.navlink').forEach(a=>{
       a.addEventListener('click', e=>{ e.preventDefault(); const path=a.getAttribute('href'); history.pushState({},'',path); showRoute(path); });
@@ -429,6 +482,7 @@
     window.addEventListener('popstate',()=> showRoute(location.pathname));
     showRoute(location.pathname);
 
+    // --- News ticker data (edit this array to update) ---
     const newsItems = [
       '🎓 Successfully defended PhD (Sep 18, 2025).',
       '🧪 Two papers at IEEE VTS 2025: ThreatLens & BugWhisperer.',
