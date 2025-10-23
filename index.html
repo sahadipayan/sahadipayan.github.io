@@ -80,15 +80,15 @@
         </div>
       </div>
       <nav class="links">
-        <a class="chip navlink" href="/">Home</a>
-        <a class="chip navlink" href="/projects">Projects</a>
-        <a class="chip navlink" href="/publications">Publications</a>
-        <a class="chip navlink" href="/experience">Experience</a>
-        <a class="chip navlink" href="/skills">Skills</a>
-        <a class="chip navlink" href="/talks">Talks & Media</a>
-        <a class="chip navlink" href="/achievements">Achievements</a>
-        <a class="chip navlink" href="/reviews">Reviews</a>
-        <a class="chip navlink" href="/contact">Contact</a>
+        <a class="chip navlink" href="#/">Home</a>
+        <a class="chip navlink" href="#/projects">Projects</a>
+        <a class="chip navlink" href="#/publications">Publications</a>
+        <a class="chip navlink" href="#/experience">Experience</a>
+        <a class="chip navlink" href="#/skills">Skills</a>
+        <a class="chip navlink" href="#/talks">Talks & Media</a>
+        <a class="chip navlink" href="#/achievements">Achievements</a>
+        <a class="chip navlink" href="#/reviews">Reviews</a>
+        <a class="chip navlink" href="#/contact">Contact</a>
       </nav>
     </div>
   </header>
@@ -346,7 +346,7 @@
         <div class="card" style="grid-column: span 6">
           <h3>Professional Activities</h3>
           <p>IEEE, ACM, IACR memberships; IEEE YP; IEEE SIGHT; Computer Society.</p>
-          <p style="margin-top:8px"><a class="btn secondary" href="/reviews">See full reviewing & judging record →</a></p>
+          <p style="margin-top:8px"><a class="btn secondary" href="#/reviews">See full reviewing & judging record →</a></p>
         </div>
         <div class="card" style="grid-column: span 6">
           <h3>Mentorship</h3>
@@ -468,36 +468,33 @@
   </main>
 
   <script>
-  // Lightweight client-side router (one-time setup)
+  // --- Hash-based SPA router (GitHub Pages friendly: no 404s on refresh) ---
+  function getPath(){
+    const h = location.hash.slice(1); // e.g., #/projects -> /projects
+    return h ? h : '/';
+  }
   function showRoute(path){
-    // 1) Show the right page
+    // Show the right page
     document.querySelectorAll('.page').forEach(sec=>sec.classList.remove('active'));
     const target = document.querySelector(`.page[data-route="${path}"]`) || document.querySelector('.page[data-route="/"]');
     if(target){ target.classList.add('active'); window.scrollTo({top:0, behavior:'instant'}); }
-
-    // 2) Highlight active nav link
+    // Highlight active nav
     document.querySelectorAll('.navlink').forEach(a=>{
-      a.classList.toggle('active', a.getAttribute('href')===path);
+      a.classList.toggle('active', a.getAttribute('href') === `#${path}`);
     });
   }
-
-  // Attach nav listeners ONCE (do not re-add inside showRoute)
+  // Attach nav listeners (hash navigation)
   document.querySelectorAll('.navlink').forEach(a=>{
     a.addEventListener('click', e=>{
-      e.preventDefault();
-      const path = a.getAttribute('href');
-      history.pushState({}, '', path);
-      showRoute(path);
+      const href = a.getAttribute('href');
+      if(href && href.startsWith('#/')){ e.preventDefault(); location.hash = href; }
     });
   });
+  // React to hash changes & initial render
+  window.addEventListener('hashchange', ()=> showRoute(getPath()));
+  showRoute(getPath());
 
-  // Back/forward buttons
-  window.addEventListener('popstate', ()=> showRoute(location.pathname));
-
-  // Initial render
-  showRoute(location.pathname);
-
-  // --- News ticker data (edit this array to update) ---
+  // --- News ticker (edit items here) ---
   const newsItems = [
     '🎓 Successfully defended PhD (Sep 18, 2025).',
     '🧪 Two papers at IEEE VTS 2025: ThreatLens & BugWhisperer.',
@@ -506,13 +503,12 @@
     '📌 DAC 2025 poster accepted: SVA Syntax Correction with Knowledge Distillation.',
     '🏢 Joining Caspia Technologies as Senior R&D Engineer (Nov 3, 2025).'
   ];
-
   const track = document.getElementById('tickerTrack');
   function renderTicker(items){
     if(!track) return;
     const ul = arr => '<ul class="ticker-list">' + arr.map(x=>`<li>${x}</li>`).join('') + '</ul>';
-    track.innerHTML = ul(items) + ul(items); // duplicate for seamless loop
-    const duration = Math.max(20, items.length * 4); // seconds
+    track.innerHTML = ul(items) + ul(items);
+    const duration = Math.max(20, items.length * 4);
     track.style.setProperty('--ticker-duration', duration + 's');
   }
   renderTicker(newsItems);
